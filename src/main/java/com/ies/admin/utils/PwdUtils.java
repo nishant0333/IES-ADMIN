@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 public class PwdUtils {
 
 public String generateRandompwdUUID() {
-		
-		String string = UUID.randomUUID().toString();
-		
-		return string;
+
+		return UUID.randomUUID().toString();
 		
 	}
 	

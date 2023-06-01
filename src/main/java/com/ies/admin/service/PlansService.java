@@ -11,7 +11,7 @@ public String createPlans(Plans plan);
 	
 	public List<Plans> getAllPlans();
 	
-	public String editPlan(String name,Plans Plan);
+	public String editPlan(String name,Plans plan);
 	
 	public List<Plans> activeStatus(String name,Boolean status);
 	

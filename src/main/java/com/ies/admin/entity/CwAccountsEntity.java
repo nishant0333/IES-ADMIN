@@ -1,11 +1,15 @@
 package com.ies.admin.entity;
 
+
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -30,6 +34,15 @@ public class CwAccountsEntity {
 	private String pazzwod;
 	private String status;
 	private Boolean active;
+	
+	private String  createdby;
+	private LocalDate createdDate;
+	private String updatedBy;
+	private LocalDate updatedDate;
+	
+//	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//	private Role role;
+	
 	
 	
 }

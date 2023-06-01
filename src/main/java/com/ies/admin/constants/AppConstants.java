@@ -24,4 +24,15 @@ public class AppConstants {
 	public static final String STR_PLAN_UPDATED="plan updated successfully";
 	public static final String STR_PLAN_EXIST="plan is Allready exist";
 	public static final String PLAN_EXCEPTION_MESSAGE="plan not found with given name";
+	
+	public static final String STR_UNLOCKED="unlocked";
+	
+	public static final String STR_INVALID_CREDENTIALS="invalid credantial";
+	
+	public static final String STR_SUCCESS="success";
+	public static final String FORGOT_PAZZWORD_SUBJECT_KEY="forgotPazzwordSubject";
+	public static final String FORGOT_PAZZWORD_RESPONSE="Pazzword sand to :";
+	
+	public static final String STR_LOGOUT="logout";
+	
 }

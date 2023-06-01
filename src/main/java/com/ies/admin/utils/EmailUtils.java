@@ -38,7 +38,6 @@ public class EmailUtils {
 		isSent=true;
 		} catch (Exception e) {
 			
-			//e.printStackTrace();
 			logger.error("Exception :: "+e.getMessage(), e);
 	
 }

@@ -1,9 +1,14 @@
 package com.ies.admin.exception;
 
-import lombok.Builder;
+
 
 
 public class ResourceNotFountException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public ResourceNotFountException() {
 		super("Resource not found");

@@ -1,5 +1,6 @@
 package com.ies.admin.entity;
 
+
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -25,5 +26,10 @@ public class PlansEntity {
 	private String endDate;
 	private String planCategory;
 	private Boolean active;
+	
+	private String  createdby;
+	private LocalDate createdDate;
+	private String updatedBy;
+	private LocalDate updatedDate;
 
 }

@@ -1,8 +1,11 @@
 package com.ies.admin.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +23,14 @@ public class PlansServiceImpl implements PlansService {
 
 	@Autowired
 	private PlansRepo plansRepo;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public String createPlans(Plans plan) {
+		
+		String logedinUser=(String)session.getAttribute("email");
 
 		String name = plan.getName();
 
@@ -35,6 +43,11 @@ public class PlansServiceImpl implements PlansService {
 			BeanUtils.copyProperties(plan, entity);
 
 			entity.setActive(true);
+			
+			
+				entity.setCreatedby(logedinUser);
+				entity.setCreatedDate(LocalDate.now());
+				
 
 			plansRepo.save(entity);
 
@@ -48,9 +61,10 @@ public class PlansServiceImpl implements PlansService {
 
 	@Override
 	public List<Plans> getAllPlans() {
-		List<PlansEntity> findAll = plansRepo.findAll();
-
-		List<Plans> activePlans = findAll.stream().filter(a -> a.getActive() == true).map(e -> {
+		
+		return plansRepo.findAll().stream()
+				.filter(a -> a.getActive().equals(booleanMethod()))
+				.map(e -> {
 			
 			Plans plan = new Plans();
 
@@ -60,15 +74,21 @@ public class PlansServiceImpl implements PlansService {
 
 		}).collect(Collectors.toList());
 
-		return activePlans;
 	}
 
 	@Override
-	public String editPlan(String name, Plans Plan) {
+	public String editPlan(String name, Plans plan) {
+		
+		String logedinUser=(String)session.getAttribute("email");
+
+		
 		PlansEntity entity = plansRepo.findByName(name)
 		.orElseThrow(()->new ResourceNotFountException(AppConstants.PLAN_EXCEPTION_MESSAGE));
 		
-		BeanUtils.copyProperties(Plan, entity);
+		BeanUtils.copyProperties(plan, entity);
+		
+		entity.setUpdatedBy(logedinUser);
+		entity.setUpdatedDate(LocalDate.now());
 		
 		plansRepo.save(entity);
 		return AppConstants.STR_PLAN_UPDATED;
@@ -84,10 +104,9 @@ public class PlansServiceImpl implements PlansService {
 		
 		plansRepo.save(entity);
 		
-		List<PlansEntity> findAll = plansRepo.findAll();
 
-		List<Plans> activePlans = findAll.stream()
-				.filter(a -> a.getActive() == true)
+		return plansRepo.findAll().stream()
+				.filter(a -> a.getActive().equals(booleanMethod()))
 				.map(e -> {
 			
 			Plans plan = new Plans();
@@ -98,7 +117,10 @@ public class PlansServiceImpl implements PlansService {
 
 		}).collect(Collectors.toList());
 
-		return activePlans;	
+	}
+	
+	private Boolean booleanMethod() {
+		return true;
 	}
 
 }
